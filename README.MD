@@ -1,6 +1,6 @@
 # PCGuide.lk Tech Blog Chrome Extension
 
-![PCGuide.lk Tech Blog](https://minidushashimal.com/logo.png)
+![PCGuide.lk Tech Blog](pcguide-logo-B.svg)
 
 ## Overview
 The **PCGuide.lk Tech Blog Chrome Extension** provides quick access to the latest tech news, cybersecurity updates, e-money insights, and fun facts from **PCGuide.lk**. Stay updated effortlessly while browsing the web!
