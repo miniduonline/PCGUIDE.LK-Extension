@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCGuide.lk Blogs Updates</title>
+  <link rel="stylesheet" href="popup.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-container">
+        <!-- Logo in an <img> with class "logo" -->
+        <h1>
+          <img id="logo" src="icons/pcguide-logo-B.svg" alt="Logo" class="logo" />
+        </h1>
+        <h2 id="headblog">BLOG UPDATES</h2>
+        <div class="controls">
+          <!-- Refresh button -->
+          <button id="refresh-btn" class="control-btn" title="Refresh Posts">
+            <i class="fa-solid fa-sync-alt"></i>
+          </button>
+          <!-- Dark mode toggle -->
+          <button id="theme-toggle" class="control-btn" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon" id="theme-icon"></i>
+          </button>
+          <!-- Website link -->
+          <button id="goto-site" title="PCGUIDE.LK">
+            <i class="fa-solid fa-globe"></i> Visit Website
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>Loading latest posts...</p>
+    </div>
+
+    <div class="posts-container" id="posts-container">
+      <!-- Posts will be dynamically added here -->
+    </div>
+
+    <div class="error-message" id="error-message">
+      <p>Couldn't load posts. Please try again later.</p>
+    </div>
+
+    <footer>
+      <p>Last updated: <span id="last-updated">Never</span></p>
+      <div class="credits">
+        <p>
+          <b>&copy; 2025 All rights reserved:
+            <a href="https://pcguide.lk" target="_blank" rel="noopener noreferrer">PCGUIDE.LK</a>
+            &amp; Its Authors.
+          </b>
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

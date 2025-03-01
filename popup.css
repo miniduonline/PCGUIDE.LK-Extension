@@ -1,0 +1,478 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --primary-color: #4285f4;
+  --primary-hover: #3367d6;
+  --dark-text: #202124;
+  --light-text: #5f6368;
+  --background: #ffffff;
+  --card-bg: #f9f9f9;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
+  --border: #eaeaea;
+  --footer-bg: rgba(242, 245, 250, 0.8);
+  --animation-speed: 0.3s;
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+  --primary-color: #4285f4;
+  --primary-hover: #5c9aff;
+  --dark-text: #e8eaed;
+  --light-text: #bdc1c6;
+  --background: #202124;
+  --card-bg: #303134;
+  --shadow: rgba(0, 0, 0, 0.2);
+  --shadow-hover: rgba(0, 0, 0, 0.3);
+  --border: #3c4043;
+  --footer-bg: rgba(32, 33, 36, 0.9);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 380px;
+  max-height: 600px;
+  overflow-x: hidden;
+  background-color: var(--background);
+  color: var(--dark-text);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Header styling with logo animation */
+header {
+  text-align: center;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.header-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+
+/* Logo animation */
+.header-container img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  transition: transform var(--animation-speed) ease, filter 0.5s ease;
+}
+
+.header-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Invert logo colors in dark mode so it appears white */
+[data-theme="dark"] .header-container img.logo {
+  filter: invert(1);
+}
+
+/* Blog updates text with glowing animation */
+#headblog {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  letter-spacing: 2px;
+  color: var(--primary-color);
+  position: relative;
+  transition: text-shadow var(--animation-speed) ease;
+}
+
+#headblog:hover {
+  text-shadow: 0 0 5px rgba(66, 133, 244, 0.3), 0 0 10px rgba(66, 133, 244, 0.2);
+}
+
+/* Controls container for buttons */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Control buttons styling */
+.control-btn {
+  background-color: transparent;
+  color: var(--dark-text);
+  border: 1px solid var(--border);
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--animation-speed);
+}
+
+.control-btn:hover {
+  background-color: var(--card-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px var(--shadow);
+}
+
+/* Add rotate animation for refresh button */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.control-btn.refreshing i {
+  animation: rotate 1s linear infinite;
+}
+
+/* Floating button with pulse effect */
+#goto-site {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all var(--animation-speed);
+  box-shadow: 0 2px 5px var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+#goto-site:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-hover);
+}
+
+#goto-site:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px var(--shadow);
+}
+
+/* Pulse animation for button */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(66, 133, 244, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(66, 133, 244, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(66, 133, 244, 0);
+  }
+}
+
+#goto-site:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.5s, opacity 1s;
+}
+
+#goto-site:active:after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
+}
+
+/* Improved loading spinner */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--primary-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  margin-bottom: 15px;
+}
+
+[data-theme="dark"] .spinner {
+  border-color: rgba(255, 255, 255, 0.1);
+  border-left-color: var(--primary-color);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading p {
+  color: var(--light-text);
+  font-size: 1rem;
+  position: relative;
+}
+
+.loading p:after {
+  content: '...';
+  position: absolute;
+  animation: ellipsis 1.5s infinite;
+  width: 15px;
+  text-align: left;
+}
+
+@keyframes ellipsis {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+}
+
+/* Error message with fade-in animation */
+.error-message {
+  padding: 20px;
+  text-align: center;
+  color: #ff5252;
+  display: none;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+[data-theme="dark"] .error-message {
+  color: #ff7a7a;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Enhanced post items with smooth hover effects */
+.posts-container {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideUp 0.5s ease forwards;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.post-item {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 5px var(--shadow);
+  cursor: pointer;
+  transition: all var(--animation-speed);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease forwards;
+  animation-delay: calc(var(--i, 0) * 0.1s);
+  opacity: 0;
+}
+
+.post-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px var(--shadow-hover);
+}
+
+.post-item:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background-color: var(--primary-color);
+  transition: width var(--animation-speed) ease;
+}
+
+.post-item:hover:after {
+  width: 100%;
+}
+
+.post-content {
+  display: flex;
+  gap: 15px;
+}
+
+.post-image {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  transition: transform var(--animation-speed) ease;
+}
+
+.post-item:hover .post-image {
+  transform: scale(1.05);
+}
+
+.post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--animation-speed) ease;
+}
+
+.post-item:hover .post-image img {
+  transform: scale(1.1);
+}
+
+.post-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-item h2 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: var(--dark-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color var(--animation-speed) ease;
+}
+
+.post-item:hover h2 {
+  color: var(--primary-color);
+}
+
+.post-date {
+  font-size: 0.8rem;
+  color: var(--light-text);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.post-date:before {
+  content: "📅";
+  margin-right: 5px;
+  font-size: 0.9rem;
+}
+
+.post-excerpt {
+  font-size: 0.9rem;
+  color: var(--dark-text);
+  opacity: 0.8;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Enhanced footer */
+footer {
+  margin-top: 20px;
+  padding: 15px 10px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--light-text);
+  text-align: center;
+  background-color: var(--footer-bg);
+  border-radius: 0 0 8px 8px;
+  transition: background-color 0.5s ease;
+}
+
+#last-updated {
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+/* Animated new badge */
+.new-badge {
+  display: inline-block;
+  background-color: #f44336;
+  color: white;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+  vertical-align: middle;
+  box-shadow: 0 2px 4px rgba(244, 67, 54, 0.3);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(244, 67, 54, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+  }
+}
+
+/* Credits section */
+.credits {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  font-size: 0.75rem;
+}
+
+.credits p {
+  margin: 5px 0;
+}
+
+.credits a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--animation-speed);
+  position: relative;
+}
+
+.credits a:hover {
+  color: var(--primary-hover);
+}
+
+.credits a:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-hover);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.credits a:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Theme transition effect */
+.theme-transition {
+  transition: background-color 0.5s ease,
+              color 0.5s ease,
+              border-color 0.5s ease,
+              box-shadow 0.5s ease;
+}
