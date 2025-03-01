@@ -32,7 +32,7 @@ We do not collect or store any personal data. For more details, read our [Privac
 Feel free to contribute! If you’d like to improve this extension, fork the repo and submit a pull request. 🚀
 
 ## Support
-For any issues or suggestions, reach out via email at [support@pcguide.lk](mailto:info@pcguide.lk) or visit [PCGuide.lk](https://pcguide.lk).
+For any issues or suggestions, reach out via email at [info@pcguide.lk](mailto:info@pcguide.lk) or visit [PCGuide.lk](https://pcguide.lk).
 
 ## License
 📜 This project is licensed under the [MIT License](LICENSE).
