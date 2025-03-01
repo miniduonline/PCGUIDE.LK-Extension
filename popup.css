@@ -74,19 +74,86 @@ header {
   filter: invert(1);
 }
 
-/* Blog updates text with glowing animation */
 #headblog {
   font-size: 2.5rem;
   font-weight: 600;
   margin: 0.5rem 0;
   letter-spacing: 2px;
-  color: var(--primary-color);
   position: relative;
-  transition: text-shadow var(--animation-speed) ease;
+  background: linear-gradient(45deg, #4285f4, #34a853, #fbbc05, #ea4335);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 8s ease infinite;
+  transition: transform 0.3s ease;
 }
 
+/* Remove any hover text shadow; instead, add a subtle upward movement */
 #headblog:hover {
-  text-shadow: 0 0 5px rgba(66, 133, 244, 0.3), 0 0 10px rgba(66, 133, 244, 0.2);
+  transform: translateY(-3px);
+}
+
+/* Glitch effect for a tech-inspired vibe on hover */
+#headblog::before,
+#headblog::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  overflow: hidden;
+  opacity: 0;
+}
+
+#headblog:hover::before {
+  animation: glitchTop 1s infinite linear;
+  opacity: 0.8;
+}
+
+#headblog:hover::after {
+  animation: glitchBottom 1s infinite linear;
+  opacity: 0.8;
+}
+
+/* Keyframes for the top glitch animation */
+@keyframes glitchTop {
+  0% { clip: rect(0, 9999px, 0, 0); transform: translate(0, 0); }
+  10% { clip: rect(0, 9999px, 10px, 0); transform: translate(-3px, -3px); }
+  20% { clip: rect(5px, 9999px, 15px, 0); transform: translate(3px, 3px); }
+  30% { clip: rect(0, 9999px, 10px, 0); transform: translate(-3px, 0); }
+  40% { clip: rect(5px, 9999px, 10px, 0); transform: translate(3px, -3px); }
+  50% { clip: rect(0, 9999px, 15px, 0); transform: translate(-3px, 3px); }
+  60% { clip: rect(5px, 9999px, 10px, 0); transform: translate(3px, 0); }
+  70% { clip: rect(0, 9999px, 10px, 0); transform: translate(-3px, -3px); }
+  80% { clip: rect(5px, 9999px, 15px, 0); transform: translate(3px, 3px); }
+  90% { clip: rect(0, 9999px, 10px, 0); transform: translate(-3px, 0); }
+  100% { clip: rect(5px, 9999px, 10px, 0); transform: translate(0, 0); }
+}
+
+/* Keyframes for the bottom glitch animation */
+@keyframes glitchBottom {
+  0% { clip: rect(0, 9999px, 0, 0); transform: translate(0, 0); }
+  10% { clip: rect(10px, 9999px, 20px, 0); transform: translate(3px, 3px); }
+  20% { clip: rect(5px, 9999px, 15px, 0); transform: translate(-3px, -3px); }
+  30% { clip: rect(10px, 9999px, 20px, 0); transform: translate(3px, 0); }
+  40% { clip: rect(5px, 9999px, 15px, 0); transform: translate(-3px, 3px); }
+  50% { clip: rect(10px, 9999px, 20px, 0); transform: translate(3px, -3px); }
+  60% { clip: rect(5px, 9999px, 15px, 0); transform: translate(-3px, 0); }
+  70% { clip: rect(10px, 9999px, 20px, 0); transform: translate(3px, 3px); }
+  80% { clip: rect(5px, 9999px, 15px, 0); transform: translate(-3px, -3px); }
+  90% { clip: rect(10px, 9999px, 20px, 0); transform: translate(3px, 0); }
+  100% { clip: rect(5px, 9999px, 15px, 0); transform: translate(0, 0); }
+}
+
+/* Gradient animation for the title background */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Controls container for buttons */
@@ -345,14 +412,18 @@ header {
 }
 
 .post-item h2 {
-  font-size: 1.1rem;
+  font-size: 1rem; /* keep original size */
+  font-weight: bold; /* keep it bold */
   margin-bottom: 5px;
   color: var(--dark-text);
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: color var(--animation-speed) ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;      /* limit to 2 lines */
+  -webkit-box-orient: vertical;
 }
+
+
 
 .post-item:hover h2 {
   color: var(--primary-color);
